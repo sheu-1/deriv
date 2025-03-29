@@ -1,9 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../type';
+
+const { width } = Dimensions.get('window');
+
+const COLORS = {
+  primary: '#000000',
+  secondary: '#777777',
+  background: '#ffffff',
+  green: '#28a745',
+  red: '#dc3545',
+  border: '#ccc',
+};
+
+const SPACING = 20;
 
 const Transaction = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Profile Section */}
       <View style={styles.profileContainer}>
         <View style={styles.profileCircle}>
@@ -20,10 +37,18 @@ const Transaction = () => {
 
       {/* Buttons Section */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.depositButton}>
+        <TouchableOpacity
+          style={styles.depositButton}
+          onPress={() => navigation.navigate('BuyScreen')}
+          activeOpacity={0.7}
+        >
           <Text style={styles.buttonText}>Buy</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.withdrawButton}>
+        <TouchableOpacity
+          style={styles.withdrawButton}
+          onPress={() => navigation.navigate('SellScreen')}
+          activeOpacity={0.7}
+        >
           <Text style={styles.buttonText}>Sell</Text>
         </TouchableOpacity>
       </View>
@@ -32,86 +57,90 @@ const Transaction = () => {
 
       {/* Recent Transactions Section */}
       <Text style={styles.recentText}>Recent transactions</Text>
-      {/* You can map through transaction data here */}
-    </View>
+      {/* Example: Map through transaction data */}
+      {/* {transactions.map((transaction) => (
+          <Text key={transaction.id}>{transaction.description}</Text>
+        ))} */}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#ffffff',
+    padding: SPACING,
+    backgroundColor: COLORS.background,
     alignItems: 'center',
   },
   profileContainer: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: SPACING,
   },
   profileCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'red',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: COLORS.red,
     justifyContent: 'center',
     alignItems: 'center',
   },
   profileInitial: {
-    color: '#ffffff',
-    fontSize: 20,
+    color: COLORS.background,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   welcomeText: {
-    marginTop: 10,
+    marginTop: 8,
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#000000',
+    color: COLORS.primary,
   },
   balanceText: {
     fontSize: 16,
-    color: '#777777',
+    color: COLORS.secondary,
   },
   amountText: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#000000',
-    marginBottom: 20,
+    color: COLORS.primary,
+    marginBottom: SPACING,
   },
   divider: {
     width: '100%',
     height: 1,
-    backgroundColor: '#ccc',
-    marginVertical: 10,
+    backgroundColor: COLORS.border,
+    marginVertical: SPACING / 2,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '80%',
-    marginBottom: 20,
+    width: width * 0.8, // Responsive width
+    marginBottom: SPACING,
   },
   depositButton: {
-    backgroundColor: 'green',
-    paddingVertical: 15,
+    backgroundColor: COLORS.green,
+    paddingVertical: 14,
     paddingHorizontal: 50,
     borderRadius: 10,
   },
   withdrawButton: {
-    backgroundColor: 'red',
-    paddingVertical: 15,
+    backgroundColor: COLORS.red,
+    paddingVertical: 14,
     paddingHorizontal: 50,
     borderRadius: 10,
   },
   buttonText: {
-    color: '#ffffff',
+    color: COLORS.background,
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+    textAlignVertical: 'center',
   },
   recentText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#000000',
-    marginTop: 10,
+    color: COLORS.primary,
+    marginTop: 8,
   },
 });
 
