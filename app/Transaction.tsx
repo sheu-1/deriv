@@ -1,16 +1,20 @@
 import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { RootStackParamList } from '../type';
+
+type RootStackParamList = {
+  BuyScreen: undefined;
+  SellScreen: undefined;
+};
 
 const { width } = Dimensions.get('window');
 
 const COLORS = {
-  primary: '#000000',
+  primary: '#000000', // Black
   secondary: '#777777',
-  background: '#ffffff',
-  green: '#28a745',
-  red: '#dc3545',
+  background: '#ffffff', // White
+  green: '#28a745', // Green for Buy
+  black: '#000000', // Black for Sell
   border: '#ccc',
 };
 
@@ -38,14 +42,14 @@ const Transaction = () => {
       {/* Buttons Section */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={styles.depositButton}
+          style={styles.buyButton}
           onPress={() => navigation.navigate('BuyScreen')}
           activeOpacity={0.7}
         >
           <Text style={styles.buttonText}>Buy</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.withdrawButton}
+          style={styles.sellButton}
           onPress={() => navigation.navigate('SellScreen')}
           activeOpacity={0.7}
         >
@@ -57,10 +61,6 @@ const Transaction = () => {
 
       {/* Recent Transactions Section */}
       <Text style={styles.recentText}>Recent transactions</Text>
-      {/* Example: Map through transaction data */}
-      {/* {transactions.map((transaction) => (
-          <Text key={transaction.id}>{transaction.description}</Text>
-        ))} */}
     </SafeAreaView>
   );
 };
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: COLORS.red,
+    backgroundColor: COLORS.primary, // Black
     justifyContent: 'center',
     alignItems: 'center',
   },
   profileInitial: {
-    color: COLORS.background,
+    color: COLORS.background, // White text inside the black circle
     fontSize: 22,
     fontWeight: 'bold',
   },
@@ -117,20 +117,20 @@ const styles = StyleSheet.create({
     width: width * 0.8, // Responsive width
     marginBottom: SPACING,
   },
-  depositButton: {
-    backgroundColor: COLORS.green,
+  buyButton: {
+    backgroundColor: COLORS.green, // Green for Buy
     paddingVertical: 14,
-    paddingHorizontal: 50,
+    paddingHorizontal: 60,
     borderRadius: 10,
   },
-  withdrawButton: {
-    backgroundColor: COLORS.red,
+  sellButton: {
+    backgroundColor: COLORS.black, // Black for Sell
     paddingVertical: 14,
-    paddingHorizontal: 50,
+    paddingHorizontal: 60,
     borderRadius: 10,
   },
   buttonText: {
-    color: COLORS.background,
+    color: COLORS.background, // White text for buttons
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',

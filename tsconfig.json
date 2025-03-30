@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, ".vscode/index.tsx", "app/App.tsx"  ]
+, ".vscode/index.tsx", "App.tsx", ".vscode/.react/Profile.tsx"  ]
 }

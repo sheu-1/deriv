@@ -100,7 +100,9 @@ const BuyScreen = () => {
         <Text style={styles.buttonText}>Buy</Text>
       </TouchableOpacity>
 
-     
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>Back</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -141,7 +143,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#000',
     paddingVertical: 12,
-    paddingHorizontal: 30,
+    paddingHorizontal: 100,
     borderRadius: 8,
     marginBottom: 10,
   },
